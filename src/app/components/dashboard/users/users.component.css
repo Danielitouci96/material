@@ -2,6 +2,23 @@ table {
   width: 100%;
 }
 
-th{
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+th:last-child{
   width: 20%;
+}
+
+.actions__search-icon{
+  color: #4fd60c;
+}
+
+.actions__edit-icon{
+  color: #d5e314;
+}
+
+.actions__delete-icon{
+  color: #ea1d0fd2;
 }

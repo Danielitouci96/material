@@ -15,6 +15,14 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -32,7 +40,15 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatMenuModule
   ],
   exports: [
     MatSlideToggleModule,
@@ -45,7 +61,15 @@ import { MatTableModule } from '@angular/material/table';
     MatIconModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatTooltipModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatCardModule,
+    MatGridListModule,
+    MatSelectModule,
+    MatDialogModule,
+    MatMenuModule
   ]
 })
 export class SharedModule { }

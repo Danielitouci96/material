@@ -1,19 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { UsersService } from './../../../services/users/users.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from 'src/app/interfaces/users';
 
 
-const ELEMENT_DATA: User[] = [
-  { id: 1, name: 'Hydrogen', lastName: "Rodriges", sex: 'Female' ,phone: 8364046, country: "Cuba"},
-  { id: 2, name: 'Helium', lastName: "Snow", sex: 'Female', phone: 8364046, country: "Cuba" },
-  { id: 3, name: 'Lithium', lastName: "PicaPica", sex: 'Female', phone: 8364046, country: "Cuba" },
-  { id: 4, name: 'Beryllium', lastName: "Troya", sex: 'Female', phone: 8364046, country: "Cuba" },
-  { id: 5, name: 'Boron', lastName: "Alves", sex: 'Female', phone: 8364046, country: "Cuba"},
-  { id: 6, name: 'Carbon', lastName: "Perez", sex: 'Female', phone: 8364046, country: "Cuba"},
-  { id: 7, name: 'Nitrogen', lastName: "Arnaldo", sex: 'Female', phone: 8364046, country: "Cuba"},
-  { id: 8, name: 'Oxygen', lastName: "Federico", sex: 'Female', phone: 8364046, country: "Cuba"},
-  { id: 9, name: 'Fluorine', lastName: "Federico", sex: 'Female', phone: 8364046, country: "Cuba"},
-  { id: 10, name: 'Neon', lastName: "Federico", sex: 'Female', phone: 8364046, country: "Cuba" },
-];
+
 
 @Component({
   selector: 'app-users',
@@ -24,12 +18,45 @@ const ELEMENT_DATA: User[] = [
 
 export class UsersComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name', 'lastName', 'sex', 'phone', 'country', 'actions'];
-  dataSource = ELEMENT_DATA;
+  users: User[] = [];
 
-  constructor() { }
+  displayedColumns: string[] = ['id', 'name', 'lastName', 'sex', 'phone', 'country', 'actions'];
+  dataSource !: MatTableDataSource<any>;
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort ;
+
+  constructor(private _userService: UsersService,
+              private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.loadUsers()
+  }
+
+  deleteUserById(i: number){
+    this._userService.deleteUsersById(i);
+    this.loadUsers();
+
+    this._snackBar.open('Deleted user', '',{
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      duration: 2000
+    })
+  }
+
+  loadUsers(){
+    this.users = this._userService.getUsers();
+    this.dataSource = new MatTableDataSource(this.users)
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 }
