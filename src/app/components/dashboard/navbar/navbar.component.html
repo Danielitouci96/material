@@ -2,7 +2,7 @@
   <span>MyTasks</span>
   <span class="example-spacer"></span>
   <button mat-button *ngFor="let item of menu" [routerLink]="item.redirect">{{item.name}}</button>
-  <button mat-button [matMenuTriggerFor]="menus">Menu</button>
+  <button mat-button [matMenuTriggerFor]="menus">More</button>
   <mat-menu #menus="matMenu">
     <button mat-menu-item *ngFor="let item of menu2" [routerLink]="item.redirect">{{item.name}}</button>
   </mat-menu>

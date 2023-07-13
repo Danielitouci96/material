@@ -12,8 +12,8 @@ export class NavbarComponent implements OnInit {
   menu: Menu[] = [];
   menu2: Menu[] = [
     {
-      "name": "Reports",
-      "redirect": "/dashboard/reports"
+      "name": "Map",
+      "redirect": "/dashboard/open-map"
     }
   ];
 

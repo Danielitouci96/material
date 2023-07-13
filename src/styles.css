@@ -8,6 +8,7 @@ body {
 
 .container{
   margin: 5px 100px 0px 100px;
+  background-color: transparent;
 }
 .example-spacer {
   flex: 1 1 auto;

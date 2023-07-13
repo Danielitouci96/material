@@ -4,6 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable, of } from 'rxjs';
 import { User } from 'src/app/interfaces/users';
 
 
@@ -36,17 +37,23 @@ export class UsersComponent implements OnInit {
   deleteUserById(i: number){
     this._userService.deleteUsersById(i);
     this.loadUsers();
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
 
-    this._snackBar.open('Deleted user', '',{
-      verticalPosition: 'top',
-      horizontalPosition: 'right',
-      duration: 2000
-    })
+     this._snackBar.open('Deleted user', '',{
+       verticalPosition: 'top',
+       horizontalPosition: 'right',
+       duration: 2000
+     })
   }
 
   loadUsers(){
-    this.users = this._userService.getUsers();
-    this.dataSource = new MatTableDataSource(this.users)
+    const users$: Observable<User[]> = of(this._userService.getUsers());
+    users$.subscribe(
+      users=>{
+        this.users = users;
+        this.dataSource = new MatTableDataSource(this.users)
+    })
   }
 
   ngAfterViewInit() {
