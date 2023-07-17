@@ -30,18 +30,19 @@ describe('UsersComponent', () => {
   let component: UsersComponent;
   let fixture: ComponentFixture<UsersComponent>;
   let userHttpService: UsersService;
-  //let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
+  let snackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   beforeEach(waitForAsync(() => {
 
     //userHttpSpy = jasmine.createSpyObj<UsersService>('UsersService', ['getUsers'])
+    snackBarSpy = jasmine.createSpyObj<MatSnackBar>('MatSnackBar', ['open'])
 
     TestBed.configureTestingModule({
       declarations: [UsersComponent],
       providers: [
         //{provide: [UsersService], useValue: userHttpSpy }
         { provide: [UsersService], useClass: UserHttpTestingService },
-        MatSnackBar,
+        {provide: MatSnackBar, useValue: snackBarSpy },
         Overlay,
       ]
     })
@@ -65,6 +66,21 @@ describe('UsersComponent', () => {
     component.loadUsers();
     expect(component.users.length).toBe(2);
   });
+
+  it('should delete a user and show snackbar', () => {
+    const spy = spyOn(userHttpService, 'deleteUsersById').and.returnValues([])
+    component.deleteUserById(1);
+    expect(component.deleteUserById(1));
+    expect(spy).toHaveBeenCalledWith(1);
+    expect(component.dataSource.paginator).toBe(component.paginator);
+    expect(component.dataSource.sort).toBe(component.sort);
+    expect(snackBarSpy.open).toHaveBeenCalledWith('Deleted user', '',{
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      duration: 2000
+    })
+    expect(component.users.length).toBe(30)
+  })
 
 
 });
