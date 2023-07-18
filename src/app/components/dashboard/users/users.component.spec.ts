@@ -8,6 +8,10 @@ import { User } from 'src/app/interfaces/users';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
 
+interface MockEvent extends Event {
+  target: HTMLInputElement;
+}
+
 class UserHttpTestingService {
   getUsers(): User[] {
     return [
@@ -68,9 +72,9 @@ describe('UsersComponent', () => {
   });
 
   it('should delete a user and show snackbar', () => {
-    const spy = spyOn(userHttpService, 'deleteUsersById').and.returnValues([])
+    const spy = spyOn(userHttpService, 'deleteUsersById').and.callThrough()
     component.deleteUserById(1);
-    expect(component.deleteUserById(1));
+
     expect(spy).toHaveBeenCalledWith(1);
     expect(component.dataSource.paginator).toBe(component.paginator);
     expect(component.dataSource.sort).toBe(component.sort);
@@ -79,8 +83,16 @@ describe('UsersComponent', () => {
       horizontalPosition: 'right',
       duration: 2000
     })
-    expect(component.users.length).toBe(30)
-  })
+    expect(component.users.length).toBe(29)
+  });
 
+  it('should return user equals to input', () => {
+    const filterValue = 'Hydro';
+    const event: MockEvent = { target: { value: filterValue } } as MockEvent;
+
+    component.applyFilter(event);
+    expect(component.dataSource.filter).toEqual(filterValue.trim().toLowerCase());
+
+  })
 
 });

@@ -52,6 +52,7 @@ export class UsersService {
   }
 
   deleteUsersById(i:number){
-    return this._users.splice(i,1)
+    const array = this._users.splice(i,1)
+    return array;
   }
 }

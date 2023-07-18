@@ -6,34 +6,34 @@
   <mat-card>
     <mat-card-content>
       <form [formGroup]="form" (ngSubmit)="submit()" action="">
-        <mat-grid-list cols="2" rowHeight="50px">
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
+        <mat-grid-list cols="3" rowHeight="70px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1" style="margin-top: 3px;">
+            <mat-form-field class="width_input" appearance="outline">
               <mat-label>Id</mat-label>
               <input matInput type="number" formControlName="id">
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile [colspan]="1" [rowspan]="7">
-            <img src="./assets/img/user_login.png" width="20%" alt="register user">
-          </mat-grid-tile>
-
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
-              <mat-label>Name</mat-label>
+            <mat-form-field class="width_input" appearance="outline">
+              <mat-label >Name</mat-label>
               <input matInput type="text" formControlName="name">
             </mat-form-field>
           </mat-grid-tile>
 
+          <mat-grid-tile [colspan]="1" [rowspan]="4">
+            <img src="./assets/img/user_login.png" width="20%" alt="register user">
+          </mat-grid-tile>
+
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
+            <mat-form-field class="width_input" appearance="outline">
               <mat-label>Last Name</mat-label>
               <input matInput type="text" formControlName="lastName">
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
+            <mat-form-field class="width_input" appearance="outline">
               <mat-label>Sex</mat-label>
               <mat-select formControlName="sex">
                 <mat-option value="Masculine">Masculine</mat-option>
@@ -43,22 +43,22 @@
           </mat-grid-tile>
 
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
+            <mat-form-field class="width_input" appearance="outline">
               <mat-label>Phone</mat-label>
               <input matInput type="number" formControlName="phone">
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="width_input">
+            <mat-form-field class="width_input" appearance="outline">
               <mat-label>Country</mat-label>
               <input matInput type="text" formControlName="country">
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-raised-button style="margin-right: 20px;" color="warn">Cancel</button>
-            <button type="submit" [disabled]="form.invalid" mat-raised-button color="primary">Acept</button>
+            <button mat-raised-button style="margin-right: 20px; width: 8rem;" color="warn">Cancel</button>
+            <button type="submit" [disabled]="form.invalid" mat-raised-button style="width: 8rem;" color="primary">Acept</button>
           </mat-grid-tile>
 
         </mat-grid-list>
