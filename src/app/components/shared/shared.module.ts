@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 //modules
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
 //Angular Material
@@ -23,6 +23,9 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 
@@ -48,7 +51,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatGridListModule,
     MatSelectModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    FormsModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatExpansionModule
   ],
   exports: [
     MatSlideToggleModule,
@@ -69,7 +76,11 @@ import { MatMenuModule } from '@angular/material/menu';
     MatGridListModule,
     MatSelectModule,
     MatDialogModule,
-    MatMenuModule
+    MatMenuModule,
+    FormsModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatExpansionModule
   ]
 })
 export class SharedModule { }

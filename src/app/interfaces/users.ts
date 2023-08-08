@@ -3,7 +3,7 @@ export interface User{
   name: string,
   lastName: string,
   country: string,
-  phone: number,
-  sex: 'Female' | 'Masculine'
+  phone: string,
+  sex: 'Female' | 'Male'
 }
 

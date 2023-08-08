@@ -10,6 +10,7 @@ import { SharedModule } from './components/shared/shared.module';
 
 //Components
 import { LoginComponent } from './components/login/login.component';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 @NgModule({
@@ -17,11 +18,15 @@ import { LoginComponent } from './components/login/login.component';
     AppComponent,
     LoginComponent,
   ],
+  exports:[
+    MatChipsModule
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    SharedModule
+    SharedModule,
+    MatChipsModule
 
 
   ],

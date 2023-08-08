@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CreateUserComponent } from './users/create-user/create-user.component';
 import { OpenMapComponent } from './open-map/open-map.component';
+import { ColumnFilterComponent } from './users/column-filter/column-filter.component';
 
 
 
@@ -21,7 +22,8 @@ import { OpenMapComponent } from './open-map/open-map.component';
     UsersComponent,
     ReportsComponent,
     CreateUserComponent,
-    OpenMapComponent
+    OpenMapComponent,
+    ColumnFilterComponent
   ],
   imports: [
     CommonModule,

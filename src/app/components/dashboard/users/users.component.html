@@ -1,15 +1,153 @@
 <div class="container">
-  <mat-toolbar style="background-color: transparent;">
-    <span>Users</span>
-    <div class="example-spacer"></div>
-    <button mat-button color="primary" routerLink="/dashboard/create-user">New User</button>
-  </mat-toolbar>
+  <div class="container__header">
+    <mat-toolbar style="background-color: transparent;">
+      <span>Users</span>
+      <div class="example-spacer"></div>
+      <button mat-button color="primary" routerLink="/dashboard/create-user">New User</button>
+    </mat-toolbar>
+  </div>
 
   <div *ngIf="users.length != 0">
-    <mat-form-field>
+    <!-- filtrar por todos los atributos de la tabla -->
+    <!-- <mat-form-field>
       <mat-label>Filter</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-    </mat-form-field>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. el 0" #input>
+    </mat-form-field> -->
+
+    <!-- <mat-form-field class="example-chip-list" appearance="fill">
+          <mat-label>
+            Filtros de tabla
+          </mat-label>
+          <mat-chip-list #chipList aria-label="Fruit selection">
+            <mat-chip
+              *ngFor="let fruit of fruits"
+              (removed)="remove(fruit)">
+              {{fruit}}
+              <button matChipRemove>
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </mat-chip>
+            <input
+              placeholder="New fruit..."
+              #fruitInput
+              [formControl]="fruitCtrl"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let fruit of filteredFruits | async" [value]="fruit">
+              {{fruit}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> -->
+
+
+    <mat-card class="card-list">
+      <div class="card">
+        <a class="card1" href="#">
+          <p>This is heading</p>
+          <p class="small">Card description with lots of great facts and interesting details.</p>
+          <div class="go-corner1" href="#">
+            <div class="go-arrow">
+              →
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a class="card2" href="#">
+          <p>This is heading</p>
+          <p class="small">Card description with lots of great facts and interesting details.</p>
+          <div class="go-corner2" href="#">
+            <div class="go-arrow">
+              →
+            </div>
+          </div>
+        </a>
+      </div>
+      <div class="card">
+        <a class="card3" href="#">
+          <p>This is heading</p>
+          <p class="small">Card description with lots of great facts and interesting details.</p>
+          <div class="go-corner3" href="#">
+            <div class="go-arrow">
+              →
+            </div>
+          </div>
+        </a>
+      </div>
+    </mat-card>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>filter_list</mat-icon>
+          Filtos de tabla
+        </mat-panel-title>
+        <mat-panel-description>
+          touch to filters
+        </mat-panel-description>
+        <span class="example-spacer"></span>
+      </mat-expansion-panel-header>
+      <main class="main-wrapper">
+        <section>
+          <div class="fiters-field">
+            <div class="title-fields">
+              <h5>Name:</h5>
+            </div>
+            <div class="filter-field__input">
+              <mat-form-field>
+                <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                  [(value)]="searchCondition.name">
+                  <mat-option *ngFor="let  condition of conditionsList"
+                    [value]="condition.value">{{condition.label}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Value" [(ngModel)]="searchValue.name" name="searchValue">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-icon-button (click)="clearColumn('name')">
+                <mat-icon>filter_alt_off</mat-icon>
+              </button>
+            </div>
+          </div>
+        </section>
+        <section>
+          <div class="fiters-field">
+            <div class="title-fields">
+              <h5>Lastname:</h5>
+            </div>
+            <div class="filter-field__input">
+              <mat-form-field>
+                <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions'
+                  [(value)]="searchCondition.lastName">
+                  <mat-option *ngFor="let  condition of conditionsList"
+                    [value]="condition.value">{{condition.label}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="Value" [(ngModel)]="searchValue.lastName" name="searchValue">
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-icon-button (click)="clearColumn('lastName')">
+                <mat-icon>filter_alt_off</mat-icon>
+              </button>
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer-wrapper">
+        <button mat-raised-button class="button" color="primary" (click)="applyFilterMultiply()">Search</button>
+      </footer>
+
+    </mat-expansion-panel>
+
 
     <div class="mat-elevation-z8">
       <table mat-table [dataSource]="dataSource" matSort>
@@ -38,7 +176,11 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="sex">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> sex </th>
-          <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
+          <td mat-cell *matCellDef="let element">
+            <p class="attr-sex_f">
+              {{element.sex}}
+            </p>
+          </td>
         </ng-container>
 
         <!-- Symbol Column -->
@@ -57,7 +199,11 @@
         <ng-container matColumnDef="actions">
           <th mat-header-cell *matHeaderCellDef> Actions</th>
           <td mat-cell *matCellDef="let element, let i=index">
-            <a class="actions__search-icon" matTooltip="Details">
+            <button mat-icon-button>
+              <mat-icon>search</mat-icon>
+            </button>
+
+            <!-- <a class="actions__search-icon" matTooltip="Details">
               <mat-icon>search</mat-icon>
             </a>
             <a class="actions__edit-icon" matTooltip="Edit">
@@ -65,7 +211,7 @@
             </a>
             <a (click)="deleteUserById(i)" class="actions__delete-icon" matTooltip="Delete">
               <mat-icon>delete</mat-icon>
-            </a>
+            </a> -->
 
 
           </td>

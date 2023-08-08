@@ -1,0 +1,20 @@
+<h1 matDialogTitle>Filtrado por: {{datos.name}}</h1>
+
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-select [panelClass]="'mat-elevation-z10'" placeholder='Conditions' [(value)]="searchCondition[datos.name]">
+      <mat-option *ngFor="let  condition of conditionsList" [value]="condition.value">{{condition.label}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Value" [(ngModel)]="searchValue[datos.name]" name="searchValue">
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button class="button" (click)="clearColumn(datos.field)">Clear</button>
+  <button mat-raised-button class="button" color="primary" (click)="applyFilterMultiply()">Search</button>
+  <!-- <button mat-button matDialogClose>Close dialog</button>
+    <button mat-button>Action</button> -->
+
+</mat-dialog-actions>
