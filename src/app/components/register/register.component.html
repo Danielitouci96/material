@@ -1,0 +1,27 @@
+
+<div class="body-register">
+  <div class="modal">
+    <!-- <div class="banner"></div> -->
+    <form class="form" [formGroup]="form" (ngSubmit)="submit()">
+      <header class="title">
+        <h1 >Registrarse</h1>
+      </header>
+      <main class="main">
+        <div class="input-wrapper">
+          <input type="text" placeholder="email" class="input" autocomplete="off" formControlName="email">
+        </div>
+        <div class="input-wrapper">
+          <input type="password" placeholder="password" class="input" autocomplete="off" formControlName="password">
+        </div>
+        <div class="input-wrapper">
+          <input type="password" placeholder="password" class="input" autocomplete="off" formControlName="password1">
+        </div>
+      </main>
+      <footer class="footer">
+        <button type="submit" [disabled]="!form.valid" > Guardar </button>
+      </footer>
+    </form>
+    <div class="img-login">
+    </div>
+  </div>
+</div>
