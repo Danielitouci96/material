@@ -81,6 +81,6 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatAutocompleteModule,
     MatChipsModule,
     MatExpansionModule
-  ]
+  ],
 })
 export class SharedModule { }

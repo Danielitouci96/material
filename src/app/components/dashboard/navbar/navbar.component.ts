@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from 'keycloak-angular';
 import { Menu } from 'src/app/interfaces/menu';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -16,11 +17,17 @@ export class NavbarComponent implements OnInit {
       "redirect": "/dashboard/open-map"
     }
   ];
+  user: string | undefined;
+  token: string = '';
 
-  constructor(private _menuService: MenuService ) { }
+  constructor(private _menuService: MenuService,
+              private keycloakService: KeycloakService ) {
+               }
 
   ngOnInit(): void {
   this.loadMenu();
+  this.initializeUserOptions();
+  this.getToken();
   }
 
   loadMenu(){
@@ -29,6 +36,25 @@ export class NavbarComponent implements OnInit {
         this.menu = data
       }
     })
+  }
+
+  private initializeUserOptions(): void{
+    this.user = this.keycloakService.getUsername();
+
+  }
+
+  private getToken(): void{
+    this.keycloakService.getToken()
+      .then((value: string) =>{
+        this.token = value;
+      }).catch((err: any) => {
+        console.log('error en token:', err);
+      })
+  }
+
+
+  logout(): void{
+      this.keycloakService.logout('http://localhost:4200');
   }
 
 }
