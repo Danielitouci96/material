@@ -7,7 +7,8 @@
     <button mat-menu-item *ngFor="let item of menu2" [routerLink]="item.redirect">{{item.name}}</button>
   </mat-menu>
   <span class="example-spacer"></span>
-  <button routerLink="/logout" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <p style="margin-top: 10px;">{{user}}</p>
+  <button  (click)="logout()" mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>

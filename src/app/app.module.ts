@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -12,6 +12,11 @@ import { SharedModule } from './components/shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { RegisterComponent } from './components/register/register.component';
+
+//keycloak imports
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { initializeKeycloak } from 'src/app/utility/app.init';
+
 
 
 @NgModule({
@@ -28,11 +33,19 @@ import { RegisterComponent } from './components/register/register.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    MatChipsModule
+    MatChipsModule,
+    KeycloakAngularModule
 
 
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
